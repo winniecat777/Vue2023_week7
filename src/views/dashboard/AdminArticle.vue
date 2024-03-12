@@ -52,6 +52,7 @@ import { useToastMessageStore } from '@/stores/toastMessage'
 
 import ArticleModal from '@/components/ArticleModal.vue'
 import DelModal from '@/components/DelModal.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 
 export default {
   data () {
@@ -65,7 +66,8 @@ export default {
   },
   components: {
     ArticleModal,
-    DelModal
+    DelModal,
+    Pagination
   },
   methods: {
     ...mapActions(useToastMessageStore, ['pushMessage']),

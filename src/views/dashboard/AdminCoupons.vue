@@ -46,9 +46,10 @@ import { useToastMessageStore } from '@/stores/toastMessage'
 
 import CouponModal from '@/components/CouponModal.vue'
 import DelModal from '@/components/DelModal.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 
 export default {
-  components: { CouponModal, DelModal },
+  components: { CouponModal, DelModal,Pagination },
   props: {
     config: Object
   },
