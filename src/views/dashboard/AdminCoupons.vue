@@ -38,6 +38,7 @@
     <CouponModal :coupon="tempCoupon" :is-new="isNew" ref="couponModal" @update-coupon="updateCoupon" />
     <DelModal :item="tempCoupon" ref="delModal" @del-item="delCoupon" />
   </div>
+  <Pagination :pages="pagination" @emitPages="getOrders" />
 </template>
 
 <script>
@@ -49,13 +50,14 @@ import DelModal from '@/components/DelModal.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 
 export default {
-  components: { CouponModal, DelModal,Pagination },
+  components: { CouponModal, DelModal, Pagination },
   props: {
     config: Object
   },
   data () {
     return {
       coupons: {},
+      pagination: {},
       tempCoupon: {
         title: '',
         is_enabled: 0,
@@ -63,7 +65,8 @@ export default {
         code: ''
       },
       isLoading: false,
-      isNew: false
+      isNew: false,
+      currentPage: 1
     }
   },
   methods: {
@@ -84,11 +87,13 @@ export default {
       const delComponent = this.$refs.delModal
       delComponent.openModal()
     },
-    getCoupons () {
+    getCoupons (currentPage = 1) {
+      this.currentPage = currentPage
       this.isLoading = true
-      const url = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_PATH}/admin/coupons`
+      const url = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_PATH}/admin/coupons?page=${currentPage}`
       this.$http.get(url, this.tempProduct).then((response) => {
         this.coupons = response.data.coupons
+        this.pagination = response.data.pagination
         this.isLoading = false
       }).catch((error) => {
         this.isLoading = false

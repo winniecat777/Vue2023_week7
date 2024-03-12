@@ -44,6 +44,7 @@
     </ArticleModal>
     <DelModal :item="tempArticle" ref="delModal" @del-item="delArticle" />
   </div>
+  <Pagination :pages="pagination" @emitPages="getOrders" />
 </template>
 
 <script>
@@ -60,6 +61,7 @@ export default {
       articles: [],
       isLoading: false,
       isNew: false,
+      pagination: {},
       tempArticle: {},
       currentPage: 1
     }
@@ -71,11 +73,12 @@ export default {
   },
   methods: {
     ...mapActions(useToastMessageStore, ['pushMessage']),
-    getArticles (page = 1) {
-      this.currentPage = page
-      const api = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_PATH}/admin/articles?page=${page}`
+    getArticles (currentPage = 1) {
+      this.currentPage = currentPage
+      const api = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_PATH}/admin/articles?page=${currentPage}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
+        this.pagination = response.data.pagination
         this.isLoading = false
         if (response.data.success) {
           this.articles = response.data.articles
