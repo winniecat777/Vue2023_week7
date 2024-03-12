@@ -14,4 +14,4 @@ export function date (time) {
 // - `toFixed(0)` 用於確保我們得到的是一個整數，因為金額通常是整數形式（[可參考](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed)）
 // - `replace()` 方法的目的是將每三位數的數字之間插入一個逗號
 
-// date 函式：比較白話來說，是將一個時間戳記轉換成可讀的格式（ex：2024/2/28）
+// date 函式：將一個時間戳記轉換成可讀的格式（ex：2024/2/28）

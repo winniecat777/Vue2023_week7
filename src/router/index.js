@@ -3,50 +3,61 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('../views/FrontView.vue'),
+    name: 'Login',
+    component: () => import('@/views/UserLogin.vue')
+  },
+  // DashBoard Pages
+  {
+    path: '/admin',
+    component: () => import('@/views/dashboard/AdminDashboard.vue'),
     children: [
       {
-        path: '',
-        name: 'Home',
-        component: () => import('../views/HomeView.vue')
-      },
-      {
-        path: 'about',
-        name: 'About',
-        component: () => import('../views/AboutView.vue')
-      },
-      {
         path: 'products',
-        component: () => import('../views/ProductsView.vue')
+        component: () => import('@/views/dashboard//AdminProducts.vue')
+      },
+      {
+        path: 'orders',
+        component: () => import('@/views/dashboard//AdminOrders.vue')
+      },
+      {
+        path: 'coupons',
+        component: () => import('@/views/dashboard//AdminCoupons.vue')
+      },
+      {
+        path: 'article',
+        component: () => import('@/views/dashboard//AdminArticle.vue')
+      }
+    ]
+  },
+  {
+    path: '/user',
+    component: () => import('@/views/dashboard//AdminDashboard.vue'),
+    children: [
+      {
+        path: 'articles',
+        component: () => import('@/views/UserArticles.vue')
+      },
+      {
+        path: 'article/:articleId',
+        component: () => import('@/views/UserArticle.vue')
       },
       {
         path: 'cart',
-        component: () => import('../views/CartView.vue')
-      }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('../views/LoginView.vue')
-  },
-  {
-    path: '/admin',
-    component: () => import('../views/dashboard/DashboardView.vue'),
-    children: [
-      {
-        path: 'products',
-        component: () => import('../views/dashboard/ProductsView.vue')
+        component: () => import('@/views/UserCart.vue')
       },
       {
-        path: 'order',
-        component: () => import('../views/dashboard/OrderView.vue')
+        path: 'checkout/:orderId',
+        component: () => import('@/views/UserCheckout.vue')
+      },
+      {
+        path: 'product/:productId',
+        component: () => import('@/views/UserProduct.vue')
       }
     ]
   },
   {
-    // 404頁面
-    path: '/:pathMatch(.*)*',
-    component: () => import('../views/NotFound.vue')
+    path: '/admin/:pathMatch(.*)*',
+    redirect: { name: 'Login' }
   }
 ]
 
