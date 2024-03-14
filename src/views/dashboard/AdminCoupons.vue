@@ -51,9 +51,6 @@ import Pagination from '@/components/PaginationComponent.vue'
 
 export default {
   components: { CouponModal, DelModal, Pagination },
-  props: {
-    config: Object
-  },
   data () {
     return {
       coupons: {},
