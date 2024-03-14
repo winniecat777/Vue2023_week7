@@ -38,6 +38,8 @@ export default {
             title: '登出狀態',
             content: response.data.message
           })
+          // 清除  cookie 內的 token
+          document.cookie = 'hexToken=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
           this.$router.push('/')
         }).catch((error) => {
           this.pushMessage({
